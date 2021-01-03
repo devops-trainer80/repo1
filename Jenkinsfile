@@ -9,7 +9,7 @@ pipeline {
         }
     stage('test'){
         when{
-            branch 'master'
+            branch 'production'
         }
             steps{
         echo 'Testing apllication successfully'        
