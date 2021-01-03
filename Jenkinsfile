@@ -1,7 +1,7 @@
 pipeline {
     agent any
     
-    stages{
+    stages {
         stage('build'){
              steps {
                echo ' Buidling the Applicaion'
@@ -11,19 +11,16 @@ pipeline {
         when{
             branch 'production'
         }
-            steps{
-        echo 'Testing apllication successfully'        
+            steps {
+                echo 'Testing apllication successfully'        
             }
         
         }
     }
     post{
-        always{
+        always {
             echo 'willexecute the pipeline again'
         }
-        
-        success{
-            'successfully executed the steps'
-        }
+               
     }
 }
