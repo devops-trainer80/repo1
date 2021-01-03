@@ -1,26 +1,30 @@
 pipeline {
     agent any
-    
-    stages {
-        stage('build'){
-             steps {
-               echo ' Buidling the Applicaion'
-            }
-        }
-    stage('test'){
-        when{
-            branch 'production'
-        }
-            steps {
-                echo 'Testing apllication successfully'        
-            }
-        
-        }
+
+    environment {
+        FOO = "bar"
     }
-    post{
-        always {
-            echo 'willexecute the pipeline again'
+
+    stages {
+        stage("Env Variables") {
+            environment {
+                NAME = "Alan"
+            }
+
+            steps {
+                echo "FOO = ${env.FOO}"
+                echo "NAME = ${env.NAME}"
+
+                script {
+                    env.TEST_VARIABLE = "some test value"
+                }
+
+                echo "TEST_VARIABLE = ${env.TEST_VARIABLE}"
+
+                withEnv(["ANOTHER_ENV_VAR=here is some value"]) {
+                    echo "ANOTHER_ENV_VAR = ${env.ANOTHER_ENV_VAR}"
+                }
+            }
         }
-               
     }
 }
